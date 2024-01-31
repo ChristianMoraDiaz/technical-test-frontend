@@ -1,28 +1,13 @@
-import { Task } from "@/interface/task";
+import {
+  CreateTaskData,
+  DeleteTaskData,
+  EditTaskData,
+  SetCompletedData,
+  Task,
+} from "@/interface/task";
 import axios, { AxiosResponse } from "axios";
 
-interface SetCompletedData {
-  taskId: string;
-  userEmail: string;
-}
-
-interface DeleteTaskData {
-  taskId: string;
-  userEmail: string;
-}
-interface EditTaskData {
-  taskId: string;
-  userEmail: string;
-  newAssignedUserId: number;
-  title: string;
-  completed: boolean;
-}
-
-export const createTask = async (taskData: {
-  weatherId: number;
-  visibilityId: number;
-  comment: string;
-}) => {
+export const createTask = async (taskData: CreateTaskData) => {
   try {
     const response: AxiosResponse<Task> = await axios.post(
       "http://localhost:4000/api/task",
