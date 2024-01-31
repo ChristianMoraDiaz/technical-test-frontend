@@ -4,6 +4,7 @@ import { getAllTasks } from "@/api/task";
 import { Task } from "@/interface/task";
 import { format } from "date-fns";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
 import Alert from "../../components/alert";
 
@@ -14,6 +15,7 @@ export default function Page(): ReactElement {
     msg: string;
     error?: string;
   } | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -59,7 +61,7 @@ export default function Page(): ReactElement {
                 <td>{task.title}</td>
                 <td>{task.author.email}</td>
                 <td>{task.assignedUser.email}</td>
-                <td>{`${task.completed}`}</td>
+                <td>{task.completed ? "Yes" : "No"}</td>
                 <td>{format(new Date(task.creationDate), "yyyy-MM-dd")}</td>
                 <td>
                   {task.completedDate
@@ -67,7 +69,7 @@ export default function Page(): ReactElement {
                     : ""}
                 </td>
                 <button className="btn btn-xs m-1">
-                  <Link href={`/tasks/${task.id}`}>Set as completed</Link>
+                  <Link href={`/tasks/${task.id}`}>Details</Link>
                 </button>
               </tr>
             ))}
