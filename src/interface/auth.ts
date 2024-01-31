@@ -4,6 +4,10 @@ export interface UserRegistrationProps {
   password: string;
 }
 
+export interface UserLoginProps {
+  email?: string;
+  password?: string;
+}
 export interface User {
   id: number;
   name: string;

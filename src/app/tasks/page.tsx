@@ -4,10 +4,10 @@ import { getAllTasks } from "@/api/task";
 import { Task } from "@/interface/task";
 import { format } from "date-fns";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Alert from "../../components/alert";
 
-export default function Page() {
+export default function Page(): ReactElement {
   const [alltasks, setAllEntries] = useState<Task[]>([]);
   const [alert, setAlert] = useState<{
     type: "info" | "success" | "error" | "warning";
