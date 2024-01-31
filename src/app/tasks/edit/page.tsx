@@ -5,13 +5,15 @@ import { Task } from "@/interface/task";
 import { emptyTask } from "@/mocks/task";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, Suspense, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Page(): ReactElement {
   return (
     <SessionProvider>
-      <TaskForm />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <TaskForm />
+      </Suspense>
     </SessionProvider>
   );
 }
@@ -159,5 +161,45 @@ function TaskForm() {
         />
       )}
     </>
+  );
+}
+
+function LoadingSkeleton() {
+  return (
+    <form className="card-body">
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Title:</span>
+        </label>
+        <div
+          className="loading-skeleton"
+          style={{ width: "200px", height: "20px" }}
+        ></div>
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Assigned User:</span>
+        </label>
+        <div
+          className="loading-skeleton"
+          style={{ width: "100px", height: "20px" }}
+        ></div>
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Completed:</span>
+        </label>
+        <div
+          className="loading-skeleton"
+          style={{ width: "100px", height: "20px" }}
+        ></div>
+      </div>
+      <div className="form-control mt-6">
+        <div
+          className="loading-skeleton"
+          style={{ width: "100px", height: "40px" }}
+        ></div>
+      </div>
+    </form>
   );
 }
