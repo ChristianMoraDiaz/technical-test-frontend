@@ -1,6 +1,8 @@
+"use client";
+import { useRouter } from "next/navigation";
 import { ReactElement } from "react";
-
 export default function Login(): ReactElement {
+  const router = useRouter();
   return (
     <form className="card-body">
       <div className="form-control">
@@ -27,6 +29,16 @@ export default function Login(): ReactElement {
         <label className="label">
           <a href="#" className="label-text-alt link link-hover">
             Forgot password?
+          </a>
+        </label>
+        <label className="label">
+          <a
+            onClick={() => {
+              router.push("/auth/register");
+            }}
+            className="label-text-alt link link-hover"
+          >
+            New User?
           </a>
         </label>
       </div>

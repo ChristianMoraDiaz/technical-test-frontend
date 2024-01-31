@@ -1,5 +1,6 @@
 "use client";
 import { userRegister } from "@/api/auth";
+import { useRouter } from "next/navigation";
 import { ReactElement, useState } from "react";
 import { useForm } from "react-hook-form";
 import Alert from "../alert";
@@ -9,12 +10,14 @@ export default function Register(): ReactElement {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const [alert, setAlert] = useState<{
     type: "info" | "success" | "error" | "warning";
     msg: string;
     error?: string;
   } | null>(null);
+  const router = useRouter();
 
   const onSubmit = handleSubmit((data) => {
     if (data.password !== data.confirmPassword) {
@@ -22,6 +25,7 @@ export default function Register(): ReactElement {
         type: "error",
         msg: "Passwords do not match",
       });
+      return;
     }
 
     const userData = {
@@ -45,6 +49,11 @@ export default function Register(): ReactElement {
           type: "error",
           msg: errorMessage,
         });
+      } finally {
+        setTimeout(() => {
+          router.push("/auth/login");
+          reset();
+        }, 1000);
       }
     };
 
