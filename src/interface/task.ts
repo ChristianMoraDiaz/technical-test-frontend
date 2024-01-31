@@ -1,3 +1,5 @@
+import { User } from "./auth";
+
 export interface Task {
   id: number;
   title: string;
@@ -6,10 +8,4 @@ export interface Task {
   completed: boolean;
   creationDate: Date;
   completedDate: Date;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
 }

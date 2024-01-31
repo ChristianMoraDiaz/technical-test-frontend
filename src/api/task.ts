@@ -7,6 +7,7 @@ interface EditTaskData {
   visibilityId: number;
   comment: string;
 }
+
 export const createTask = async (taskData: {
   weatherId: number;
   visibilityId: number;

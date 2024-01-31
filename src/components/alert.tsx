@@ -105,7 +105,7 @@ export default function Alert({
       >
         {svgPath}
       </svg>
-      <span>{msg}</span>
+      <span className="text-sm">{msg}</span>
     </div>
   );
 }
