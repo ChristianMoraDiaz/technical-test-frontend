@@ -1,24 +1,13 @@
 "use client";
-import { deleteTask, editTask, getTaskById } from "@/api/task";
+import { completedtask, deleteTask, getTaskById } from "@/api/task";
 import Alert from "@/components/alert";
 import { Task } from "@/interface/task";
+import { emptyTask } from "@/mocks/task";
 import { format } from "date-fns";
 import { SessionProvider, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
-
-const mockDate = new Date("1996-01-31T12:00:00");
-
-const emptyTask: Task = {
-  id: 0,
-  title: "",
-  author: { name: "", email: "", id: 0 },
-  assignedUser: { name: "", email: "", id: 0 },
-  completed: false,
-  completedDate: mockDate,
-  creationDate: mockDate,
-};
 
 export default function Page({
   params,
@@ -47,8 +36,8 @@ function DetailPage({ params }: { params: { taskId: string } }): ReactElement {
       if (!session?.user?.email) {
         return;
       }
-      console.log(taskId, session.user.email);
-      await editTask({ taskId, userEmail: session.user.email });
+
+      await completedtask({ taskId, userEmail: session.user.email });
 
       setAlert({
         type: "success",
