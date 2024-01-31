@@ -25,7 +25,6 @@ export default function Login(): ReactElement {
       password: data.password,
       redirect: false,
     });
-    console.log(data, res);
 
     if (res?.error) {
       setAlert({

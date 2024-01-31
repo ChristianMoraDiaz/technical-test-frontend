@@ -24,7 +24,6 @@ export const userLogin = async (userData: UserLoginProps) => {
       userData
     );
 
-    console.log("LOGIN =>", response.data);
     return response.data;
   } catch (error: any) {
     throw (

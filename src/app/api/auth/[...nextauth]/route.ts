@@ -12,7 +12,6 @@ export const authOptions = {
         password: { label: "Password", type: "password", placeholder: "*****" },
       },
       async authorize(credentials, req) {
-        console.log("HOLA ACA ESTOY");
         const loginData: UserLoginProps = {
           email: credentials?.email,
           password: credentials?.password,
