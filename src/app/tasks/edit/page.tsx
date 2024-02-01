@@ -79,6 +79,7 @@ function TaskForm() {
       try {
         const response = await getTaskById(taskId);
         setTask(response);
+        setLoading(false);
       } catch (error: any) {
         let errorMessage =
           error.message || "An error occurred while updating the task.";
@@ -87,8 +88,6 @@ function TaskForm() {
           type: "error",
           msg: errorMessage,
         });
-      } finally {
-        setLoading(false);
       }
     };
 

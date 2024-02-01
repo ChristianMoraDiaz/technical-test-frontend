@@ -37,10 +37,15 @@ export default function Register(): ReactElement {
     const userSignup = async () => {
       try {
         const response = await userRegister(userData);
-        setAlert({
-          type: "success",
-          msg: `User ${response.name} created successfully!`,
-        });
+        if (response)
+          setAlert({
+            type: "success",
+            msg: `User ${response.name} created successfully!`,
+          });
+        setTimeout(() => {
+          router.push("/auth/login");
+          reset();
+        }, 1000);
       } catch (error: any) {
         let errorMessage =
           error.message || "An error occurred while creating the user.";
@@ -49,11 +54,6 @@ export default function Register(): ReactElement {
           type: "error",
           msg: errorMessage,
         });
-      } finally {
-        setTimeout(() => {
-          router.push("/auth/login");
-          reset();
-        }, 1000);
       }
     };
 
