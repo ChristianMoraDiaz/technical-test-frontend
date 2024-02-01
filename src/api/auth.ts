@@ -12,7 +12,7 @@ export const userRegister = async (userData: UserRegistrationProps) => {
   } catch (error: any) {
     throw (
       error.response?.data || {
-        message: "An error occurred while creating the task.",
+        message: "An error in the register process",
       }
     );
   }
@@ -29,7 +29,7 @@ export const userLogin = async (userData: UserLoginProps) => {
   } catch (error: any) {
     throw (
       error.response?.data || {
-        message: "An error occurred while creating the task.",
+        message: "An error in the login process.",
       }
     );
   }
