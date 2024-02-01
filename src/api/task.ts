@@ -10,7 +10,7 @@ import axios, { AxiosResponse } from "axios";
 export const createTask = async (taskData: CreateTaskData) => {
   try {
     const response: AxiosResponse<Task> = await axios.post(
-      "http://localhost:4000/api/task",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task`,
       taskData
     );
     return response.data;
@@ -26,7 +26,7 @@ export const createTask = async (taskData: CreateTaskData) => {
 export const getAllTasks = async () => {
   try {
     const response: AxiosResponse<Task[]> = await axios.get(
-      "http://localhost:4000/api/task"
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task`
     );
     return response.data;
   } catch (error: any) {
@@ -41,7 +41,7 @@ export const getAllTasks = async () => {
 export const getTaskById = async (taskId: string) => {
   try {
     const response: AxiosResponse<Task> = await axios.get(
-      `http://localhost:4000/api/task/${taskId}`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task/${taskId}`
     );
     return response.data;
   } catch (error: any) {
@@ -56,7 +56,7 @@ export const getTaskById = async (taskId: string) => {
 export const completedtask = async (data: SetCompletedData) => {
   try {
     const response: AxiosResponse<Task> = await axios.put(
-      `http://localhost:4000/api/task/completed/${data.taskId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task/completed/${data.taskId}`,
       {
         userEmail: data.userEmail,
       }
@@ -74,7 +74,7 @@ export const completedtask = async (data: SetCompletedData) => {
 export const deleteTask = async (data: DeleteTaskData) => {
   try {
     const response: AxiosResponse<Task> = await axios.delete(
-      `http://localhost:4000/api/task/delete/${data.taskId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task/delete/${data.taskId}`,
       {
         data: { userEmail: data.userEmail },
       }
@@ -91,16 +91,19 @@ export const deleteTask = async (data: DeleteTaskData) => {
 
 export const updateTask = async (data: EditTaskData) => {
   try {
-    await axios.put(`http://localhost:4000/api/task/edit/${data.taskId}`, {
-      userEmail: data.userEmail,
-      newAssignedUserId: data.newAssignedUserId,
-      title: data.title,
-      completed: data.completed,
-    });
+    await axios.put(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/task/edit/${data.taskId}`,
+      {
+        userEmail: data.userEmail,
+        newAssignedUserId: data.newAssignedUserId,
+        title: data.title,
+        completed: data.completed,
+      }
+    );
   } catch (error: any) {
     throw (
       error.response?.data || {
-        message: "An error occurred while editing the task.",
+        message: "An error occurred while editing the task.!!!",
       }
     );
   }

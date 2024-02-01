@@ -52,6 +52,7 @@ function TaskForm() {
       title: data.title,
       completed: data.completed,
     };
+
     try {
       await updateTask(updateData);
       setAlert({
@@ -62,10 +63,13 @@ function TaskForm() {
       setTimeout(() => {
         router.push("/tasks");
       }, 1500);
-    } catch (error) {
+    } catch (error: any) {
+      let errorMessage =
+        error.message || "An error occurred while editing the task.";
+
       setAlert({
         type: "error",
-        msg: "An error occurred while updating the task.",
+        msg: errorMessage,
       });
     }
   });

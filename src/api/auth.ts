@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const userRegister = async (userData: UserRegistrationProps) => {
   try {
     const response: AxiosResponse<User> = await axios.post(
-      "http://localhost:4000/auth/register",
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       userData
     );
     return response.data;
@@ -21,7 +21,7 @@ export const userRegister = async (userData: UserRegistrationProps) => {
 export const userLogin = async (userData: UserLoginProps) => {
   try {
     const response: AxiosResponse<User> = await axios.post(
-      "http://localhost:4000/auth/login",
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
       userData
     );
 
